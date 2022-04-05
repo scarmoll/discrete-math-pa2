@@ -1,12 +1,18 @@
 package com.example;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * JavaFX App
@@ -14,10 +20,14 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    String output = "";
 
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 640, 480);
+
+        System.out.print(primeFactorization(111));
+
         stage.setScene(scene);
         stage.show();
     }
@@ -34,5 +44,21 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+
+    public static List<Long> primeFactorization(long n) {
+        List<Long> result = new ArrayList<Long>();
+        for (long i = 2; i <= n / i; i++) {
+          while (n % i == 0) {
+            result.add(i);
+            n /= i;
+          }
+        }
+      
+        if (n > 1) {
+          result.add(n);
+        }
+        
+        return result;
+      }
 
 }
