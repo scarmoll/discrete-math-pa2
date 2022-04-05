@@ -17,7 +17,10 @@
       <Text fx:id="textP"/>
       <Label text="q is:"/>
       <Text fx:id="textQ"/>
+      <Label text="e is:"/>
+      <Text fx:id="resultE"/>
       <Button fx:id="calculatePQ" text="Calculate P and Q" onAction="#primeFactorization"/>
+      <Button fx:id="calculateE" text="Calculate E" onAction="#relativelyPrime"/>
       <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary"/>
    </children>
    <padding>

@@ -12,6 +12,7 @@ public class PrimaryController {
 
     public Text textQ;
     public Text textP;
+    public Text resultE;
     public TextField inputN;
 
     @FXML
@@ -22,6 +23,7 @@ public class PrimaryController {
         inputN.setText("33731");
         textQ.setText("Q goes here!");
         textP.setText("P goes here!");
+        resultE.setText("Result E");
     }
 
     @FXML
@@ -47,5 +49,21 @@ public class PrimaryController {
         textP.setText(String.valueOf(result.get(0)));
         textQ.setText(String.valueOf(result.get(1)));
         return result;
+    }
+
+    private int gcd(int p, int q) {
+        int t;
+        while(q != 0){
+            t = p;
+            p = q;
+            q = t%q;
+        }
+        System.out.print(p);
+        // resultE.setText(Integer.toString(p));
+        return p;
+    }
+
+    private boolean relativelyPrime() {
+        return gcd(Integer.parseInt(textP.getText()),Integer.parseInt(textQ.getText())) == 1;
     }
 }
