@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -12,18 +13,19 @@ public class PrimaryController {
 
     public Text textQ;
     public Text textP;
-    public Text resultE;
     public TextField inputN;
+    public Button calculatePQ;
+    public Button calculateE;
+    public Text textE;
+    public Button encryptButton;
+    public TextField inputMessage;
+    public Button primaryButton;
+    public Text textEncryptedMessage;
+    public Text textTime;
 
     @FXML
     public void initialize() {
-//        List<Long> result = App.primeFactorization(n);
-//        System.out.println(result);
-
         inputN.setText("33731");
-        textQ.setText("Q goes here!");
-        textP.setText("P goes here!");
-        resultE.setText("Result E");
     }
 
     @FXML
@@ -53,17 +55,17 @@ public class PrimaryController {
 
     private int gcd(int p, int q) {
         int t;
-        while(q != 0){
+        while (q != 0 && q > 11) {
             t = p;
             p = q;
-            q = t%q;
+            q = t % q;
         }
-        System.out.print(p);
-        // resultE.setText(Integer.toString(p));
+        textE.setText(Integer.toString(p));
         return p;
     }
 
+    @FXML
     private boolean relativelyPrime() {
-        return gcd(Integer.parseInt(textP.getText()),Integer.parseInt(textQ.getText())) == 1;
+        return gcd(Integer.parseInt(textP.getText()), Integer.parseInt(textQ.getText())) == 1;
     }
 }
