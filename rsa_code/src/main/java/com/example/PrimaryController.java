@@ -71,7 +71,7 @@ public class PrimaryController {
         return asciiMessage;
     }
 
-    private int calculatePhi() {
+    private int phi() {
         int p = Integer.valueOf(textP.getText());
         int q = Integer.valueOf(textQ.getText());
 
@@ -90,16 +90,21 @@ public class PrimaryController {
 
     @FXML
     private void relativelyPrime() {
+        int startValue = 0;
         int e = 0;
-        int n = calculatePhi();
-        for (e = 2; e < n; e++) {
-
+        int n = phi();
+        for (startValue = 2; startValue < n; startValue++) {
             // e is for public key exponent
+            e = getRandomNumber(startValue, n);
             if (gcd(e, n) == 1) {
                 break;
             }
         }
 
         textE.setText(String.valueOf(e));
+    }
+
+    private int getRandomNumber(int min, int max) {
+        return (int) ((Math.random()* (max-min)) + min);
     }
 }
