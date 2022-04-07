@@ -3,9 +3,11 @@ package com.example;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -22,6 +24,9 @@ public class PrimaryController {
     public Button primaryButton;
     public Text textEncryptedMessage;
     public Text textTime;
+    public Button encodeButton;
+    public Text encryptedMessage;
+    public Text encodedMessage;
 
     @FXML
     public void initialize() {
@@ -53,7 +58,20 @@ public class PrimaryController {
         return result;
     }
 
-    private int numbersToCombine() {
+    @FXML
+    private List<Long> encodeMessage() {
+        String message = String.valueOf(inputMessage.getText());
+        List<Long> asciiMessage = new ArrayList<>();
+        for (int i = 0; i < message.length(); i++) {
+            asciiMessage.add(Long.valueOf(message.charAt(i)));
+        }
+
+        encodedMessage.setText(asciiMessage.stream().map(Object::toString)
+                .collect(Collectors.joining(", ")));
+        return asciiMessage;
+    }
+
+    private int calculatePhi() {
         int p = Integer.valueOf(textP.getText());
         int q = Integer.valueOf(textQ.getText());
 
@@ -73,9 +91,9 @@ public class PrimaryController {
     @FXML
     private void relativelyPrime() {
         int e = 0;
-        int n = numbersToCombine();
+        int n = calculatePhi();
         for (e = 2; e < n; e++) {
- 
+
             // e is for public key exponent
             if (gcd(e, n) == 1) {
                 break;
