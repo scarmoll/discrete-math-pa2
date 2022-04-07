@@ -114,7 +114,7 @@ public class PrimaryController {
             }
         }
 
-        textE.setText(String.valueOf(e));
+        textE.setText(Integer.toString(e));
     }
 
     private int getRandomNumber(int min, int max) {
