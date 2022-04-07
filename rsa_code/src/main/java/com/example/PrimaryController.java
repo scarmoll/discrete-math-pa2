@@ -1,6 +1,7 @@
 package com.example;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,11 +22,14 @@ public class PrimaryController {
     public Button encryptButton;
     public TextField inputMessage;
     public Button primaryButton;
-    public Text textEncryptedMessage;
     public Text textTime;
     public Button encodeButton;
     public Text encryptedMessage;
     public Text encodedMessage;
+
+    List<Long> asciiMessageList = new ArrayList<>();
+    List<BigInteger> encryptedMessageList = new ArrayList<>();
+    List<BigInteger> decryptedMessageList = new ArrayList<>();
 
     @FXML
     public void initialize() {
@@ -39,7 +43,7 @@ public class PrimaryController {
 
     @FXML
     public List<Long> primeFactorization() {
-        long n = Long.parseLong(inputN.getText());
+        Long n = Long.parseLong(inputN.getText());
 
         List<Long> result = new ArrayList<Long>();
         for (long i = 2; i <= n / i; i++) {
@@ -58,16 +62,49 @@ public class PrimaryController {
     }
 
     @FXML
-    private List<Long> encodeMessage() {
-        String message = String.valueOf(inputMessage.getText());
-        List<Long> asciiMessage = new ArrayList<>();
-        for (int i = 0; i < message.length(); i++) {
-            asciiMessage.add(Long.valueOf(message.charAt(i)));
+    private void encryptMessage() {
+        Long e = Long.valueOf(textE.getText());
+        Long n = Long.parseLong(inputN.getText());
+
+        for (Long character : asciiMessageList) {
+            BigInteger bC = BigInteger.valueOf(character);
+            BigInteger bN = BigInteger.valueOf(n);
+
+            encryptedMessageList.add((bC.pow(Math.toIntExact(e))).mod(bN));
+        }
+        encryptedMessage.setText(encryptedMessageList.stream().map(Object::toString)
+                .collect(Collectors.joining(", ")));
+    }
+
+    @FXML
+    private void decryptAndDecodeMessage() {
+        //  Decryption
+        BigInteger encrypt = BigInteger.valueOf(11574);
+        BigInteger dd = BigInteger.valueOf(33731);
+        BigInteger decryptedMessage = encrypt.pow(7003);
+
+        for (BigInteger encryptedCharacter : encryptedMessageList) {
+            decryptedMessageList.add(encryptedCharacter.pow(7003).mod(dd));
         }
 
-        encodedMessage.setText(asciiMessage.stream().map(Object::toString)
+        //  Decoding
+        StringBuilder decodedMessage = new StringBuilder();
+
+        for (BigInteger asciiValue : decryptedMessageList){
+            decodedMessage.append(Character.toString(asciiValue.intValue()));
+        }
+        System.out.println(decodedMessage.toString());
+    }
+
+    @FXML
+    private void encodeMessage() {
+        String message = String.valueOf(inputMessage.getText());
+        for (int i = 0; i < message.length(); i++) {
+            asciiMessageList.add(Long.valueOf(message.charAt(i)));
+        }
+
+        encodedMessage.setText(asciiMessageList.stream().map(Object::toString)
                 .collect(Collectors.joining(", ")));
-        return asciiMessage;
     }
 
     private int phi() {
