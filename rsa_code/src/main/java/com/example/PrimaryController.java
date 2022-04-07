@@ -22,7 +22,6 @@ public class PrimaryController {
     public Button encryptButton;
     public TextField inputMessage;
     public Button primaryButton;
-    public Text textEncryptedMessage;
     public Text textTime;
     public Button encodeButton;
     public Text encryptedMessage;
@@ -30,6 +29,7 @@ public class PrimaryController {
 
     List<Long> asciiMessageList = new ArrayList<>();
     List<BigInteger> encryptedMessageList = new ArrayList<>();
+    List<BigInteger> decryptedMessageList = new ArrayList<>();
 
     @FXML
     public void initialize() {
@@ -63,8 +63,6 @@ public class PrimaryController {
 
     @FXML
     private void encryptMessage() {
-        System.out.println(asciiMessageList);
-
         Long e = Long.valueOf(textE.getText());
         Long n = Long.parseLong(inputN.getText());
 
@@ -76,6 +74,26 @@ public class PrimaryController {
         }
         encryptedMessage.setText(encryptedMessageList.stream().map(Object::toString)
                 .collect(Collectors.joining(", ")));
+    }
+
+    @FXML
+    private void decryptAndDecodeMessage() {
+        //  Decryption
+        BigInteger encrypt = BigInteger.valueOf(11574);
+        BigInteger dd = BigInteger.valueOf(33731);
+        BigInteger decryptedMessage = encrypt.pow(7003);
+
+        for (BigInteger encryptedCharacter : encryptedMessageList) {
+            decryptedMessageList.add(encryptedCharacter.pow(7003).mod(dd));
+        }
+
+        //  Decoding
+        StringBuilder decodedMessage = new StringBuilder();
+
+        for (BigInteger asciiValue : decryptedMessageList){
+            decodedMessage.append(Character.toString(asciiValue.intValue()));
+        }
+        System.out.println(decodedMessage.toString());
     }
 
     @FXML
