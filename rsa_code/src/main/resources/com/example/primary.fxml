@@ -27,7 +27,7 @@
             <Label layoutX="14.0" layoutY="179.0" text="Message:" />
             <Button fx:id="encodeButton" layoutX="279.0" layoutY="175.0" onAction="#encodeMessage" text="Encode Message" />
             <TextField fx:id="inputMessage" layoutX="122.0" layoutY="175.0" maxWidth="200" />
-            <Button fx:id="primaryButton" layoutX="353.0" layoutY="443.0" onAction="#switchToSecondary" text="Switch to Secondary View" />
+            <Button fx:id="primaryButton" layoutX="122" layoutY="360.0" onAction="#switchToSecondary" text="Switch to decoding" />
             <Label layoutX="14.0" layoutY="226.0" text="Encoded Message:" />
             <Label layoutX="279.0" layoutY="59.0" text="Amount of time busy finding p and q:" />
             <Text fx:id="textTime" layoutX="279.0" layoutY="91.0" wrappingWidth="35.0" />
