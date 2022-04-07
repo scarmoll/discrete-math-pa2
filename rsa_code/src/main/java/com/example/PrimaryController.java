@@ -1,6 +1,7 @@
 package com.example;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,8 +29,7 @@ public class PrimaryController {
     public Text encodedMessage;
 
     List<Long> asciiMessageList = new ArrayList<>();
-    List<Long> encryptedMessageList = new ArrayList<>();
-    Long n = null;
+    List<BigInteger> encryptedMessageList = new ArrayList<>();
 
     @FXML
     public void initialize() {
@@ -43,7 +43,7 @@ public class PrimaryController {
 
     @FXML
     public List<Long> primeFactorization() {
-        n = Long.parseLong(inputN.getText());
+        Long n = Long.parseLong(inputN.getText());
 
         List<Long> result = new ArrayList<Long>();
         for (long i = 2; i <= n / i; i++) {
@@ -62,14 +62,20 @@ public class PrimaryController {
     }
 
     @FXML
-    private void encryptMessage(){
+    private void encryptMessage() {
         System.out.println(asciiMessageList);
 
         Long e = Long.valueOf(textE.getText());
+        Long n = Long.parseLong(inputN.getText());
 
-        for (Long character: asciiMessageList){
-            System.out.println((Math.pow(character, e)) % n);
+        for (Long character : asciiMessageList) {
+            BigInteger bC = BigInteger.valueOf(character);
+            BigInteger bN = BigInteger.valueOf(n);
+
+            encryptedMessageList.add((bC.pow(Math.toIntExact(e))).mod(bN));
         }
+        encryptedMessage.setText(encryptedMessageList.stream().map(Object::toString)
+                .collect(Collectors.joining(", ")));
     }
 
     @FXML
