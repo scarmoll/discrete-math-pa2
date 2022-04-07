@@ -53,19 +53,35 @@ public class PrimaryController {
         return result;
     }
 
-    private int gcd(int p, int q) {
-        int t;
-        while (q != 0 && q > 11) {
-            t = p;
-            p = q;
-            q = t % q;
-        }
-        textE.setText(Integer.toString(p));
-        return p;
+    private int numbersToCombine() {
+        int p = Integer.valueOf(textP.getText());
+        int q = Integer.valueOf(textQ.getText());
+
+        int n = (p-1)*(q-1);
+
+        return n;
+    }
+
+    private int gcd(int e, int n)
+    {
+        if (e == 0)
+            return n;
+        else
+            return gcd(n % e, e);
     }
 
     @FXML
-    private boolean relativelyPrime() {
-        return gcd(Integer.parseInt(textP.getText()), Integer.parseInt(textQ.getText())) == 1;
+    private void relativelyPrime() {
+        int e = 0;
+        int n = numbersToCombine();
+        for (e = 2; e < n; e++) {
+ 
+            // e is for public key exponent
+            if (gcd(e, n) == 1) {
+                break;
+            }
+        }
+
+        textE.setText(String.valueOf(e));
     }
 }
