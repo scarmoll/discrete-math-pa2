@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -93,9 +92,10 @@ public class PrimaryController {
         int startValue = 0;
         int e = 0;
         int n = phi();
+        int max = 20;
         for (startValue = 2; startValue < n; startValue++) {
             // e is for public key exponent
-            e = getRandomNumber(startValue, n);
+            e = getRandomNumber(startValue, max);
             if (gcd(e, n) == 1) {
                 break;
             }
