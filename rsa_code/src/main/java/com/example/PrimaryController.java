@@ -28,6 +28,10 @@ public class PrimaryController {
     public Text encryptedMessage;
     public Text encodedMessage;
 
+    List<Long> asciiMessageList = new ArrayList<>();
+    List<Long> encryptedMessageList = new ArrayList<>();
+    Long n = null;
+
     @FXML
     public void initialize() {
         inputN.setText("33731");
@@ -40,7 +44,7 @@ public class PrimaryController {
 
     @FXML
     public List<Long> primeFactorization() {
-        long n = Long.parseLong(inputN.getText());
+        n = Long.parseLong(inputN.getText());
 
         List<Long> result = new ArrayList<Long>();
         for (long i = 2; i <= n / i; i++) {
@@ -59,16 +63,25 @@ public class PrimaryController {
     }
 
     @FXML
-    private List<Long> encodeMessage() {
+    private void encryptMessage(){
+        System.out.println(asciiMessageList);
+
+        Long e = Long.valueOf(textE.getText());
+
+        for (Long character: asciiMessageList){
+            System.out.println((Math.pow(character, e)) % n);
+        }
+    }
+
+    @FXML
+    private void encodeMessage() {
         String message = String.valueOf(inputMessage.getText());
-        List<Long> asciiMessage = new ArrayList<>();
         for (int i = 0; i < message.length(); i++) {
-            asciiMessage.add(Long.valueOf(message.charAt(i)));
+            asciiMessageList.add(Long.valueOf(message.charAt(i)));
         }
 
-        encodedMessage.setText(asciiMessage.stream().map(Object::toString)
+        encodedMessage.setText(asciiMessageList.stream().map(Object::toString)
                 .collect(Collectors.joining(", ")));
-        return asciiMessage;
     }
 
     private int phi() {
