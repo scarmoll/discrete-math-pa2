@@ -42,6 +42,8 @@ public class PrimaryController {
 
     @FXML
     public List<Long> primeFactorization() {
+        long start_time = System.currentTimeMillis();
+
         Long n = Long.parseLong(inputN.getText());
 
         List<Long> result = new ArrayList<Long>();
@@ -55,6 +57,11 @@ public class PrimaryController {
         if (n > 1) {
             result.add(n);
         }
+        long end_time = System.currentTimeMillis();
+        String difference = (end_time - start_time) + " ms";
+
+        textTime.setText(difference);
+
         textP.setText(String.valueOf(result.get(0)));
         textQ.setText(String.valueOf(result.get(1)));
         return result;
