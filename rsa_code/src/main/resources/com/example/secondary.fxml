@@ -20,7 +20,7 @@
             <Text fx:id="resultD" layoutX="160.0" layoutY="135" wrappingWidth="35.0" />
             <Button fx:id="calculateBtn" layoutX="279.0" layoutY="100.0" onAction="#calculateD" text="Calculate D" />
             <Label layoutX="13.0" layoutY="159.0" text="Encrypted Message:" />
-            <Button fx:id="decryptButton" layoutX="278.0" layoutY="155.0" onAction="#decryptAndDecodeMessage" text="Decrypt cypher" />
+            <Button layoutX="278.0" layoutY="155.0" onAction="#decryptAndDecodeMessage" text="Decrypt cypher" />
             <TextField fx:id="inputEncryptedMessage" layoutX="122.0" layoutY="155.0" maxWidth="200" />
             <Label layoutX="13.0" layoutY="206.0" text="Decrypted Message:" />
             <Text fx:id="decryptedMessage" layoutX="129.0" layoutY="219.0" wrappingWidth="149.00000201538205" />

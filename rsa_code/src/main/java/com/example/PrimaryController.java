@@ -24,7 +24,7 @@ public class PrimaryController {
     public Button primaryButton;
     public Text textTime;
     public Button encodeButton;
-    public Text encryptedMessage;
+    public TextField encryptedMessage;
     public Text encodedMessage;
 
     List<Long> asciiMessageList = new ArrayList<>();

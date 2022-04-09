@@ -17,6 +17,8 @@ public class SecondaryController {
     public TextField inputE;
     public Button calculateBtn;
     public Text resultD;
+    public TextField inputEncryptedMessage;
+    public Text decryptedMessage;
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -60,5 +62,34 @@ public class SecondaryController {
         }
 
         resultD.setText(Integer.toString(result));
+    }
+
+
+    @FXML
+    private void decryptAndDecodeMessage() {
+        //  Decryption
+        BigInteger bN = BigInteger.valueOf(Long.valueOf(inputN.getText()));
+        int d = Integer.parseInt(resultD.getText());
+
+        String input = inputEncryptedMessage.getText();
+        List<String> encryptedMessageList = Arrays.asList(input.split("\\s*,\\s*"));
+        List<BigInteger> bEncryptedMessageList = new ArrayList<>();
+        List<BigInteger> decryptedMessageList = new ArrayList<>();
+
+        for (String stringValue : encryptedMessageList){
+            bEncryptedMessageList.add(BigInteger.valueOf(Long.parseLong(stringValue)));
+        }
+
+        for (BigInteger encryptedCharacter : bEncryptedMessageList) {
+            decryptedMessageList.add(encryptedCharacter.pow(d).mod(bN));
+        }
+
+        //  Decoding
+        StringBuilder decodedMessage = new StringBuilder();
+
+        for (BigInteger asciiValue : decryptedMessageList){
+            decodedMessage.append(Character.toString(asciiValue.intValue()));
+        }
+        decryptedMessage.setText(decodedMessage.toString());
     }
 }
