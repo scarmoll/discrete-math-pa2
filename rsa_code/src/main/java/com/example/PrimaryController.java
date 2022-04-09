@@ -95,16 +95,16 @@ public class PrimaryController {
                 .collect(Collectors.joining(", ")));
     }
 
-    private int phi() {
-        int p = Integer.valueOf(textP.getText());
-        int q = Integer.valueOf(textQ.getText());
+    private long phi() {
+        long p = Integer.valueOf(textP.getText());
+        long q = Integer.valueOf(textQ.getText());
 
-        int n = (p-1)*(q-1);
+        long n = (p-1)*(q-1);
 
         return n;
     }
 
-    private int gcd(int e, int n)
+    private long gcd(long e, long n)
     {
         if (e == 0)
             return n;
@@ -115,8 +115,8 @@ public class PrimaryController {
     @FXML
     private void relativelyPrime() {
         int startValue = 0;
-        int e = 0;
-        int n = phi();
+        long e = 0;
+        long n = phi();
         int max = 20;
         for (startValue = 2; startValue < n; startValue++) {
             // e is for public key exponent
@@ -126,7 +126,7 @@ public class PrimaryController {
             }
         }
 
-        textE.setText(Integer.toString(e));
+        textE.setText(Long.toString(e));
     }
 
     private int getRandomNumber(int min, int max) {
