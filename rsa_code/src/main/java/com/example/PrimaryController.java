@@ -29,7 +29,6 @@ public class PrimaryController {
 
     List<Long> asciiMessageList = new ArrayList<>();
     List<BigInteger> encryptedMessageList = new ArrayList<>();
-    List<BigInteger> decryptedMessageList = new ArrayList<>();
 
     @FXML
     public void initialize() {
@@ -65,6 +64,7 @@ public class PrimaryController {
     private void encryptMessage() {
         Long e = Long.valueOf(textE.getText());
         Long n = Long.parseLong(inputN.getText());
+        encryptedMessageList.clear();
 
         for (Long character : asciiMessageList) {
             BigInteger bC = BigInteger.valueOf(character);
@@ -77,28 +77,9 @@ public class PrimaryController {
     }
 
     @FXML
-    private void decryptAndDecodeMessage() {
-        //  Decryption
-        BigInteger encrypt = BigInteger.valueOf(11574);
-        BigInteger dd = BigInteger.valueOf(33731);
-        BigInteger decryptedMessage = encrypt.pow(7003);
-
-        for (BigInteger encryptedCharacter : encryptedMessageList) {
-            decryptedMessageList.add(encryptedCharacter.pow(7003).mod(dd));
-        }
-
-        //  Decoding
-        StringBuilder decodedMessage = new StringBuilder();
-
-        for (BigInteger asciiValue : decryptedMessageList){
-            decodedMessage.append(Character.toString(asciiValue.intValue()));
-        }
-        System.out.println(decodedMessage.toString());
-    }
-
-    @FXML
     private void encodeMessage() {
         String message = String.valueOf(inputMessage.getText());
+        asciiMessageList.clear();
         for (int i = 0; i < message.length(); i++) {
             asciiMessageList.add(Long.valueOf(message.charAt(i)));
         }
