@@ -24,7 +24,6 @@
             <TextField fx:id="inputEncryptedMessage" layoutX="122.0" layoutY="155.0" maxWidth="200" />
             <Label layoutX="13.0" layoutY="206.0" text="Decrypted Message:" />
             <Text fx:id="decryptedMessage" layoutX="129.0" layoutY="219.0" wrappingWidth="149.00000201538205" />
-            <Button fx:id="secondaryButton" layoutX="133.0" layoutY="313.0" onAction="#switchToPrimary" text="Switch to encoding" />
          </children>
       </AnchorPane>
    </children>
