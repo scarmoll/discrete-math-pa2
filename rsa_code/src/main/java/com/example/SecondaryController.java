@@ -25,10 +25,10 @@ public class SecondaryController {
         App.setRoot("primary");
     }
 
-    private int phiFromN(int n){
-        List<Integer> result = new ArrayList<Integer>();
+    private long phiFromN(long n){
+        List<Long> result = new ArrayList<Long>();
 
-        for (int i = 2; i <= n / i; i++) {
+        for (long i = 2; i <= n / i; i++) {
             while (n % i == 0) {
                 result.add(i);
                 n /= i;
@@ -39,18 +39,18 @@ public class SecondaryController {
             result.add(n);
         }
 
-        int phi = (result.get(0)-1) * (result.get(1)-1);
+        long phi = (result.get(0)-1) * (result.get(1)-1);
         return phi;
     }
 
     @FXML
     private void calculateD() {
-        int n = Integer.parseInt(inputN.getText());
-        int phi = phiFromN(n);
+        long n = Long.valueOf(inputN.getText());
+        long phi = phiFromN(n);
 
-        int e = Integer.parseInt(inputE.getText());
+        long e = Integer.parseInt(inputE.getText());
         double d = 0;
-        int result = 0;
+        long result = 0;
 
         for (int i = 0; i < phi; i++) {
             d = (1+i*phi)/(double)e;
@@ -61,7 +61,7 @@ public class SecondaryController {
             }
         }
 
-        resultD.setText(Integer.toString(result));
+        resultD.setText(Long.toString(result));
     }
 
 
